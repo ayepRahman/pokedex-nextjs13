@@ -1,0 +1,1 @@
+module "@heroicons/react/solid";

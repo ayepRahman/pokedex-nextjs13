@@ -1,10 +1,7 @@
-import dotenv from "dotenv";
+import { MONGO_DB_URI } from "@config/index";
 import { MongoClient, MongoClientOptions } from "mongodb";
 
-dotenv.config();
-
-const uri: string = process.env.ONLY_MONGODB_URI || "";
-
+const uri: string = MONGO_DB_URI;
 const options: MongoClientOptions = {};
 
 export async function getMongoClient() {

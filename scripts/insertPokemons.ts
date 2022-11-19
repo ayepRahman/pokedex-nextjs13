@@ -4,7 +4,7 @@
 
 import * as fs from "fs";
 import path from "path";
-import { getServerMongoDb } from "../config/mongodb";
+import { getMongoDb } from "../config/mongodb";
 
 // e.g running $ ts-node -P tsconfig-dev <script name>
 
@@ -24,7 +24,7 @@ import { getServerMongoDb } from "../config/mongodb";
     };
   });
 
-  const db = await getServerMongoDb();
+  const db = await getMongoDb();
   const doc = db.collection("pokemons");
   const res = await doc.insertMany(mappedData);
 })();

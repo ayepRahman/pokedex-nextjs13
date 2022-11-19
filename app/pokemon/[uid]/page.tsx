@@ -69,8 +69,8 @@ export default async function PokemonDetails({ params }: PokemonDetailsProps) {
 /**
  * generateStaticParams allow us to generate static pages during build time.
  */
-export async function generateStaticParams() {
-  return Array.from({ length: 10 }, (_, i) => ({
-    uid: (i + 1).toString(),
-  }));
-}
+// export async function generateStaticParams() {
+//   return Array.from({ length: 10 }, (_, i) => ({
+//     uid: (i + 1).toString(),
+//   }));
+// }

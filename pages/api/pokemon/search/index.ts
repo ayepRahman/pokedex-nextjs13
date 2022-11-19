@@ -10,8 +10,8 @@ export default handler.get<{
 }>(async (req, res) => {
   const query = req?.query || {};
   const qs = query?.qs || "";
-  const limit = query?.limit || 10;
-  const offset = query?.offset || 0;
+  const limit = query?.limit ? Number(query.limit) : 10;
+  const offset = query?.offset ? Number(query.offset) : 0;
   const order = query?.order || "asc";
 
   const db = await getMongoDb();
@@ -27,6 +27,8 @@ export default handler.get<{
     };
   }
 
+  const hasMore = limit + offset < total;
+
   const data = await collection
     .find(filter)
     .sort({ _id: order === "asc" ? 1 : -1 })
@@ -34,5 +36,5 @@ export default handler.get<{
     .limit(+limit)
     .toArray();
 
-  return res.json({ items: data, total });
+  return res.json({ items: data, total, hasMore });
 });

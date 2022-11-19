@@ -1,4 +1,6 @@
+import Header from "@components/Header";
 import "@styles/globals.css";
+import Head from "./head";
 import { Providers } from "./provider";
 
 export default function RootLayout({
@@ -8,11 +10,13 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <head>
-        <title>Pokedex | Nextjs13</title>
-      </head>
+      <Head />
       <body className="bg-neutral-100">
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header></Header>
+
+          {children}
+        </Providers>
       </body>
     </html>
   );

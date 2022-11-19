@@ -34,7 +34,7 @@ export default async function PokemonDetails({ params }: PokemonDetailsProps) {
           </div>
 
           <div className="text-md font-bold mb-2">Types</div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {pokemon?.types?.map((a) => {
               return (
                 <div
@@ -48,7 +48,7 @@ export default async function PokemonDetails({ params }: PokemonDetailsProps) {
           </div>
 
           <div className="text-md font-bold mb-2 mt-4">Abilities</div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {pokemon?.abilities?.map((a) => {
               return (
                 <div

@@ -2,12 +2,19 @@ import {
   CreatePokemonInput,
   CreatePokemonRes,
 } from "@schemas/CreatePokemonInput";
+import { sumBy } from "lodash";
+
+import { SearchPokemonRes } from "@schemas/SearchPokemonRes";
+import { SearchPokemonsArgs } from "@schemas/SearchPokemonsArgs";
 import {
   createPokemon,
   getPokemonAbilities,
   getPokemonTypes,
+  searchPokemons,
 } from "@services/api/pokemon";
 import {
+  useInfiniteQuery,
+  UseInfiniteQueryOptions,
   useMutation,
   UseMutationOptions,
   useQuery,
@@ -85,6 +92,34 @@ export const useCreatePokemon = (
         payload: createPokemonRes?.payload,
       };
     },
+    ...options,
+  });
+};
+
+/**
+ * @desc - A hook query function to search pokemon
+ * @returns { success: boolean }
+ */
+export const useSearchPokemons = (
+  args: Partial<SearchPokemonsArgs>,
+  options?: UseInfiniteQueryOptions<SearchPokemonRes>
+) => {
+  return useInfiniteQuery({
+    queryKey: ["searchPokemons", args],
+    queryFn: async ({ pageParam = 0 }) => {
+      return await searchPokemons({
+        qs: args?.qs || "",
+        limit: args?.limit || 10,
+        offset: pageParam,
+        order: args?.order || "asc",
+      });
+    },
+    // ...options,
+    getNextPageParam: (_, allPages) => {
+      const dataLength = sumBy(allPages, (page) => page?.items?.length);
+      return dataLength;
+    },
+
     ...options,
   });
 };

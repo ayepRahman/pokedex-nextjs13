@@ -4,6 +4,7 @@ import {
   CreatePokemonRes,
 } from "@schemas/CreatePokemonInput";
 import { Pokemon } from "@schemas/Pokemon";
+import { SearchPokemonsArgs } from "@schemas/SearchPokemonsArgs";
 import axios from "axios";
 
 export const getPokemonByUID = async (uid: number): Promise<Pokemon> => {
@@ -15,7 +16,19 @@ export const getPokemonByUID = async (uid: number): Promise<Pokemon> => {
   return res?.data;
 };
 
-export const searchPokemons = async () => {};
+export const searchPokemons = async ({
+  qs = "",
+  limit = 10,
+  offset = 0,
+  order = "asc",
+}: SearchPokemonsArgs) => {
+  const res = await axios({
+    url: `${BASE_API_URL}/pokemon/search?qs=${qs}&limit=${limit}&offset=${offset}&order=${order}`,
+    method: "GET",
+  });
+
+  return res?.data;
+};
 
 export const getPokemonTypes = async () => {
   return await axios({

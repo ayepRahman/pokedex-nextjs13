@@ -33,9 +33,11 @@ export interface Option {
 }
 
 /**
- * TODO:
- * redirect to /pokemon/[id] on success
- * create a /pokemon/[id] page to display pokemon
+ * TODO: fix this once Next.js 13 && RHF is fixed on their side
+ * @desc
+ * There seem to an issue with Next.js 13 with RHF while building.
+ * Suspect due to the esm, that next not able to import RHF correctly.
+ * On Next.js 12 it work perfectly. Parking this code here to ref later on.
  */
 
 export default function CreatePokemon() {
@@ -132,7 +134,7 @@ export default function CreatePokemon() {
     createPokemon({
       name: values.name,
       types: values.types.map((t) => t.value),
-      abilities: values.types.map((t) => t.value),
+      abilities: values.abilities.map((t) => t.value),
       file: values.file,
       url: values.url,
     });
@@ -195,7 +197,7 @@ export default function CreatePokemon() {
           <div className="mb-4">
             <Controller
               control={control}
-              name={CreatePokemonFormDataEnum.Enum.abilties}
+              name={CreatePokemonFormDataEnum.Enum.abilities}
               render={({ field: { onChange, value } }) => (
                 <Select
                   isMultiple
@@ -203,14 +205,14 @@ export default function CreatePokemon() {
                   onChange={(v) => onChange(v)}
                   value={value as unknown as Option | Option[] | null}
                   options={abilitiesOptions}
-                  placeholder="Select your abilties"
+                  placeholder="Select your abilities"
                 />
               )}
             />
 
             <ErrorMessage
               errors={errors}
-              name={CreatePokemonFormDataEnum.Enum.abilties}
+              name={CreatePokemonFormDataEnum.Enum.abilities}
               render={({ message }) => (
                 <p className=" text-error-300 text-sm mt-2">{message}</p>
               )}

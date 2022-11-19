@@ -1,4 +1,37 @@
+![image](./public/banner.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Motivation
+
+With the recent nextjs 13 and react RSC, i've decided to take this opportunity to build a simple Pokedex App that leverage this technology.
+
+## Tool / Library used
+
+- Next js v13
+  - Known for SSR, SSG, ISR, with the new features it focus on letting developer build server side component first
+  - SSR (server side render) - generate an html on server and server to the client side
+  - SSG (static generation) - generate static html page
+  - ISR (incremental static generation ) - allow to generate page on the basis of a timer.
+- tanstack react-query
+  - A great tool for handling asynchronous management tool without worrying about global state managment. It caches the result of a promise and store a serialize key/value pair in the browser storage.
+- react-hook-form
+  - a library that handle focus on performance - reduces the amount of re-render by using ref
+  - handling of validation more efficiently
+  - great dx experience
+- zod
+  - Zod is a TypeScript-first schema declaration and validation library. I'm using the term "schema" to broadly refer to any data type, from a simple string to a complex nested object.
+- mongodb
+  - for handling persistant data, i'am using mongodb database with nextjs api route for creating API's
+
+## Key features
+
+- Search Pokemons Pagination
+- Pokemon Details Page
+  - i've added the liberty of using nextjs getStaticParams to generate static page during build time. E.g `<base route>/pokemon/1` will return an html, this reduce the time to load the page significantly
+- Create Pokemon
+
+---
 
 ## Getting Started
 
@@ -14,7 +47,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/pokemon/.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 

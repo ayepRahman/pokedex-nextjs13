@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getMongoDb } from "@config/mongodb";
+import { clientPromise } from "@config/mongodb";
 import { handler } from "@utils/api";
 
 export default handler.get<{
@@ -14,7 +14,8 @@ export default handler.get<{
   const offset = query?.offset ? Number(query.offset) : 0;
   const order = query?.order || "asc";
 
-  const db = await getMongoDb();
+  const client = await clientPromise;
+  const db = client.db("test");
   const collection = db.collection("pokemons");
   const total = await collection.countDocuments();
 

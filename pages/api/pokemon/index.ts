@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getMongoDb } from "@config/mongodb";
+import { clientPromise } from "@config/mongodb";
 import { CreatePokemonRes } from "@schemas/CreatePokemonInput";
 import { pokemonSchema } from "@schemas/Pokemon";
 import { handler } from "@utils/api";
@@ -20,7 +20,8 @@ export default handler.post<NextApiRequest, CreatePokemonRes>(
       body?.abilities?.map((a: string) => ({ ability: { name: a } })) || [];
     const imgUrl = body?.imgUrl;
 
-    const db = await getMongoDb();
+    const client = await clientPromise;
+    const db = client.db("test");
     const collection = db.collection("pokemons");
     const total = await collection.countDocuments();
 

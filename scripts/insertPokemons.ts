@@ -2,9 +2,9 @@
  * scrape 151 of og pokemon and insert in db
  */
 
+import { clientPromise } from "@config/mongodb";
 import * as fs from "fs";
 import path from "path";
-import { getMongoDb } from "../config/mongodb";
 
 // e.g running $ ts-node -P tsconfig-dev <script name>
 
@@ -24,7 +24,8 @@ import { getMongoDb } from "../config/mongodb";
     };
   });
 
-  const db = await getMongoDb();
+  const client = await clientPromise;
+  const db = client.db("test");
   const doc = db.collection("pokemons");
   const res = await doc.insertMany(mappedData);
 })();

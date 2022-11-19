@@ -17,15 +17,7 @@ export default function PaginatedPokemon() {
 
   const debounceQS = useDebounce(qs, 600);
 
-  const {
-    data,
-    fetchNextPage,
-    fetchPreviousPage,
-    hasNextPage,
-    hasPreviousPage,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-  } = useSearchPokemons({
+  const { data, fetchNextPage } = useSearchPokemons({
     qs: debounceQS,
   });
 

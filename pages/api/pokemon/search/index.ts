@@ -27,16 +27,12 @@ export default handler.get<{
     };
   }
 
-  console.log("filter", filter);
-
   const data = await collection
     .find(filter)
     .sort({ _id: order === "asc" ? 1 : -1 })
     .skip(+offset)
     .limit(+limit)
     .toArray();
-
-  // console.log("[data]", data);
 
   return res.json({ items: data, total });
 });

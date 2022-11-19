@@ -22,7 +22,7 @@
       "@contexts/*": ["contexts/*"],
       "@constants/*": ["constants/*"],
       "@utils/*": ["utils/*"],
-      "@lib/*": ["lib/*"],
+      "@services/*": ["services/*"],
       "@schemas/*": ["schemas/*"]
     }
   },

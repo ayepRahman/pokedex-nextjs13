@@ -7,13 +7,6 @@ const theme = {
     // you can configure the container to be centered
     center: true,
     padding: "1rem",
-    screens: {
-      sm: "640px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1280px",
-      "2xl": "1888px",
-    },
   },
   colors: {
     white: "#FFFFFF",
@@ -98,17 +91,6 @@ const theme = {
       purple:
         "linear-gradient(134.14deg, #766BF2 40.76%, #5944D7 55.74%, #613FE9 85.26%)",
     },
-  },
-  boxShadow: {
-    xs: "0px 1px 2px -1px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.1)",
-    sm: " 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1)",
-    md: "0px 4px 6px -4px rgba(16, 24, 40, 0.1), 0px 10px 15px -3px rgba(16, 24, 40, 0.1)",
-    lg: "0px 8px 10px -6px rgba(16, 24, 40, 0.1), 0px 20px 25px -5px rgba(16, 24, 40, 0.1)",
-    xl: "0px 25px 50px -12px rgba(16, 24, 40, 0.1)",
-  },
-  fontFamily: {
-    dmsans: ["DM Sans", "sans-serif"],
-    montserrat: ["Montserrat", "sans-serif"],
   },
   blur: {
     sm: "8px",

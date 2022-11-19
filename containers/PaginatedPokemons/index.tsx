@@ -1,7 +1,7 @@
 "use client";
 
+import { searchPokemons } from "@services/api/pokemon";
 import { useQuery } from "@tanstack/react-query";
-import { searchPokemons } from "services/api/searchPokemons";
 
 export default function PaginatedPokemon() {
   const { data } = useQuery({ queryKey: ["add"], queryFn: searchPokemons });

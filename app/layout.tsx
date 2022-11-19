@@ -8,8 +8,10 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <head />
-      <body className="bg-slate-900">
+      <head>
+        <title>Pokedex | Nextjs13</title>
+      </head>
+      <body className="bg-neutral-100">
         <Providers>{children}</Providers>
       </body>
     </html>

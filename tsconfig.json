@@ -35,7 +35,7 @@
       "@contexts/*": ["contexts/*"],
       "@constants/*": ["constants/*"],
       "@utils/*": ["utils/*"],
-      "@lib/*": ["services/*"],
+      "@services/*": ["services/*"],
       "@schemas/*": ["schemas/*"]
     }
   },

@@ -24,14 +24,7 @@ import { getServerMongoDb } from "../config/mongodb";
     };
   });
 
-  console.log(JSON.stringify(data[0]));
-
   const db = await getServerMongoDb();
   const doc = db.collection("pokemons");
-
-  console.log("INIT");
-
   const res = await doc.insertMany(mappedData);
-
-  console.log("COMPLETE", res);
 })();

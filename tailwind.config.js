@@ -7,11 +7,14 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}", // Note the addition of the `app` directory.
     "./components/**/*.{js,ts,jsx,tsx}",
     "./containers/**/*.{js,ts,jsx,tsx}",
+    "./public/**/*.html",
+    "./node_modules/flowbite-react/**/*.js",
+    "./node_modules/react-tailwindcss-select/dist/index.esm.js",
   ],
   theme: {
     extend: {
       ...theme,
     },
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 };

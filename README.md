@@ -2,6 +2,8 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+[Demo Link](https://pokedex.scentt.xyz/)
+
 ## Motivation
 
 With the recent nextjs 13 and react RSC, i've decided to take this opportunity to build a simple Pokedex App that leverage this technology.

@@ -109,7 +109,7 @@ export const useSearchPokemons = (
     queryFn: async ({ pageParam = 0 }) => {
       return await searchPokemons({
         qs: args?.qs || "",
-        limit: args?.limit || 10,
+        limit: args?.limit || 20,
         offset: pageParam,
         order: args?.order || "asc",
       });

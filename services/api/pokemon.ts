@@ -8,12 +8,8 @@ import { SearchPokemonsArgs } from "@schemas/SearchPokemonsArgs";
 import axios from "axios";
 
 export const getPokemonByUID = async (uid: number): Promise<Pokemon> => {
-  const res = await axios({
-    url: `${BASE_API_URL}/pokemon/${uid}`,
-    method: "GET",
-  });
-
-  return res?.data;
+  const res = await axios.get(`${BASE_API_URL}/pokemon/${uid}`);
+  return res.data;
 };
 
 export const searchPokemons = async ({
@@ -22,26 +18,23 @@ export const searchPokemons = async ({
   offset = 0,
   order = "asc",
 }: SearchPokemonsArgs) => {
-  const res = await axios({
-    url: `${BASE_API_URL}/pokemon/search?qs=${qs}&limit=${limit}&offset=${offset}&order=${order}`,
-    method: "GET",
-  });
+  const res = await axios.get(
+    `${BASE_API_URL}/search?qs=${qs}&limit=${limit}&offset=${offset}&order=${order}`
+  );
 
-  return res?.data;
+  return res.data;
 };
 
 export const getPokemonTypes = async () => {
-  return await axios({
-    url: "https://pokeapi.co/api/v2/type?offset=0&limit=100",
-    method: "GET",
-  });
+  const res = await axios.get(
+    "https://pokeapi.co/api/v2/type?offset=0&limit=100"
+  );
+
+  return res.data;
 };
 
 export const getPokemonAbilities = async () => {
-  return await axios({
-    url: "https://pokeapi.co/api/v2/ability?offset=0&limit=100",
-    method: "GET",
-  });
+  const res = axios.get("https://pokeapi.co/api/v2/ability?offset=0&limit=100");
 };
 
 export const createPokemon = async (
@@ -49,19 +42,10 @@ export const createPokemon = async (
 ): Promise<CreatePokemonRes> => {
   const { name, types, abilities, imgUrl } = args;
 
-  const res = await axios({
-    url: `${BASE_API_URL}/pokemon`,
+  const res = await axios.post(`${BASE_API_URL}/create`, {
     method: "POST",
-    data: {
-      name,
-      types,
-      abilities,
-      imgUrl,
-    },
+    body: JSON.stringify({ name, types, abilities, imgUrl }),
   });
 
-  return {
-    success: res?.data?.success,
-    payload: res?.data?.payload,
-  };
+  return res.data;
 };

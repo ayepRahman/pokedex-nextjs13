@@ -3,7 +3,6 @@ import { S3UploadURLReq } from "@schemas/GetS3UploadURLReq";
 import { S3UploadURLRes } from "@schemas/GetS3UploadURLRes";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { removeAllSpacing } from "@utils/string";
-import axios from "axios";
 
 /**
  * @desc - A hook function to fetch S3 upload authentication endpoint.

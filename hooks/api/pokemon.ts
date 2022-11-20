@@ -4,11 +4,13 @@ import {
 } from "@schemas/CreatePokemonInput";
 import { sumBy } from "lodash";
 
+import { Pokemon } from "@schemas/Pokemon";
 import { SearchPokemonRes } from "@schemas/SearchPokemonRes";
 import { SearchPokemonsArgs } from "@schemas/SearchPokemonsArgs";
 import {
   createPokemon,
   getPokemonAbilities,
+  getPokemonByUID,
   getPokemonTypes,
   searchPokemons,
 } from "@services/api/pokemon";
@@ -20,8 +22,8 @@ import {
   useQuery,
   UseQueryOptions,
 } from "@tanstack/react-query";
+import { fetcher } from "@utils/fetcher";
 import { removeAllSpacing } from "@utils/string";
-import axios from "axios";
 
 /**
  * @desc - A hook query function to fetch pokemon abilities
@@ -76,7 +78,10 @@ export const useCreatePokemon = (
         },
       };
 
-      await axios.put(url, file, options);
+      await fetcher(url, {
+        body: file,
+        ...options,
+      });
 
       const imgUrl = `https://pokedex-nextjs13.s3.amazonaws.com/${fileName}`;
 
@@ -120,6 +125,23 @@ export const useSearchPokemons = (
       return dataLength;
     },
 
+    ...options,
+  });
+};
+
+/**
+ * @desc - A hook query function to fetch pokemon abilities
+ * @returns { name: string, url: string }[]
+ */
+export const useGetPokemonByUID = (
+  uid: number,
+  options?: UseQueryOptions<Pokemon>
+) => {
+  return useQuery({
+    queryKey: ["getPokemonByUID", uid],
+    queryFn: async () => {
+      return await getPokemonByUID(uid);
+    },
     ...options,
   });
 };

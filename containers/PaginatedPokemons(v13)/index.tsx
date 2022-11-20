@@ -7,26 +7,28 @@ import { Pokemon } from "@schemas/Pokemon";
 import { TextInput } from "flowbite-react";
 import { flatMap } from "lodash";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 
 export default function PaginatedPokemon() {
   const [qs, setQs] = useState<string>("");
+  const debounceQS = useDebounce(qs, 600);
   const router = useRouter();
 
-  const debounceQS = useDebounce(qs, 600);
-
-  const { data, fetchNextPage } = useSearchPokemons({
-    qs: debounceQS,
-  });
+  const { data, fetchNextPage } = useSearchPokemons(
+    { qs: debounceQS },
+    {
+      refetchOnMount: "always",
+    }
+  );
 
   const pokemons: Pokemon[] = useMemo(() => {
-    return flatMap(data?.pages, (page: any) => page.items);
+    return flatMap(data?.pages, (page: any) => page?.items);
   }, [data]);
 
   const hasMore = useMemo(
-    () => data?.pages[data?.pages?.length - 1]?.hasMore,
+    () => data?.pages?.[data?.pages?.length - 1]?.hasMore || false,
     [data]
   );
 
@@ -47,22 +49,25 @@ export default function PaginatedPokemon() {
         useWindow={false}
       >
         {!pokemons?.length && (
-          <Card className="h-[240px] w-full relative flex flex-col justify-center text-center !p-0 hover:shadow-xl">
+          <Card
+            key="not found"
+            className="h-[240px] w-full relative flex flex-col justify-center text-center !p-0 hover:shadow-xl"
+          >
             Not Found
           </Card>
         )}
         {!!pokemons?.length &&
-          pokemons.map((poke) => {
+          pokemons.map((poke, i) => {
             return (
               <Card
                 onClick={() => router.push(`/pokemon/${poke?.uid}`)}
                 className="relative !p-0 hover:shadow-xl cursor-pointer"
-                key={poke?.name}
+                key={`${poke?.name}+i`}
               >
                 <div className="h-[300px] lg:h-[240px] w-full relative">
                   <Image
                     src={poke?.sprites?.front_default}
-                    alt={poke?.name}
+                    alt={`${poke?.name}+i`}
                     fill
                   />
                 </div>

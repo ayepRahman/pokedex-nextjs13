@@ -1,8 +1,7 @@
 "use client";
 
 import Button from "@components/Button";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();
@@ -10,13 +9,12 @@ const Header = () => {
   return (
     <div className="w-full border-b shadow-lg py-4 bg-slate-100 h-[74px]">
       <div className="container mx-auto flex items-center justify-between">
-        <Link
-          className="cursor-pointer text-md lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
-        "
-          href="/"
+        <div
+          onClick={() => router.push("/")}
+          className="cursor-pointer text-md lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
         >
           Pokedex | Nextjs13
-        </Link>
+        </div>
 
         <Button
           size="sm"

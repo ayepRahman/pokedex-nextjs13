@@ -12,7 +12,7 @@ const pokemonUID = z.number();
  */
 export default handler.get(async (req, res) => {
   const query = req?.query || {};
-  const uid = query?.uid ? Number(query?.uid) : undefined;
+  const uid = query?.uid ? Number(query?.uid) : 0;
   pokemonUID.parse(uid);
   const client = await clientPromise;
   const db = client.db("test");
@@ -21,5 +21,5 @@ export default handler.get(async (req, res) => {
     uid: uid,
   });
 
-  return res.json(pokemonRes);
+  return res.status(200).json(pokemonRes);
 });

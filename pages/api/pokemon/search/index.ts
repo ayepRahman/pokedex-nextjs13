@@ -19,8 +19,6 @@ export default handler.get<{
   const collection = db.collection("pokemons");
   const total = await collection.countDocuments();
 
-  // .find({ $text: {$search: serachText}})
-
   let filter: any = {};
   if (!!qs) {
     filter = {
@@ -37,5 +35,5 @@ export default handler.get<{
     .limit(+limit)
     .toArray();
 
-  return res.json({ items: data, total, hasMore });
+  return res.status(200).json({ items: data, total, hasMore });
 });

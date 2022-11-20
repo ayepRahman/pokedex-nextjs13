@@ -17,12 +17,12 @@ export default function PaginatedPokemon() {
 
   const debounceQS = useDebounce(qs, 600);
 
-  const { data, fetchNextPage } = useSearchPokemons({
+  const { data, fetchNextPage, isLoading } = useSearchPokemons({
     qs: debounceQS,
   });
 
   const pokemons: Pokemon[] = useMemo(() => {
-    return flatMap(data?.pages, (page: any) => page.items);
+    return flatMap(data?.pages, (page: any) => page?.items);
   }, [data]);
 
   const hasMore = useMemo(
@@ -46,7 +46,13 @@ export default function PaginatedPokemon() {
         hasMore={hasMore}
         useWindow={false}
       >
-        {!pokemons?.length && (
+        {!pokemons?.length && isLoading && (
+          <Card className="h-[240px] w-full relative flex flex-col justify-center text-center !p-0 hover:shadow-xl">
+            Loading...
+          </Card>
+        )}
+
+        {!pokemons?.length && !isLoading && (
           <Card className="h-[240px] w-full relative flex flex-col justify-center text-center !p-0 hover:shadow-xl">
             Not Found
           </Card>

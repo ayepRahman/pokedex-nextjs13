@@ -23,7 +23,7 @@ export default async function PokemonDetails({ params }: PokemonDetailsProps) {
           <Image
             className="z-0"
             src={pokemon?.sprites?.front_default}
-            alt="img"
+            alt={`${uid}-img`}
             fill
           />
         </div>

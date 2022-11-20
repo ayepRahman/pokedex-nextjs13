@@ -45,11 +45,34 @@ export default function PaginatedPokemon() {
         loadMore={() => fetchNextPage()}
         hasMore={hasMore}
         useWindow={false}
+        loader={
+          <>
+            {Array.from({ length: 10 }, (_, i) => {
+              return (
+                <Card
+                  key={`${i}-loader`}
+                  className="animate-pulse  h-[240px] w-full relative flex flex-col justify-center text-center !p-0 hover:shadow-xl overflow-hidden"
+                >
+                  <div className=" bg-slate-400 h-[300px] lg:h-[240px] w-full relative"></div>
+                </Card>
+              );
+            })}
+          </>
+        }
       >
         {!pokemons?.length && isLoading && (
-          <Card className="h-[240px] w-full relative flex flex-col justify-center text-center !p-0 hover:shadow-xl">
-            Loading...
-          </Card>
+          <>
+            {Array.from({ length: 20 }, (_, i) => {
+              return (
+                <Card
+                  key={`${i}-loader`}
+                  className="animate-pulse  h-[240px] w-full relative flex flex-col justify-center text-center !p-0 hover:shadow-xl overflow-hidden"
+                >
+                  <div className=" bg-slate-400 h-[300px] lg:h-[240px] w-full relative"></div>
+                </Card>
+              );
+            })}
+          </>
         )}
 
         {!pokemons?.length && !isLoading && (
